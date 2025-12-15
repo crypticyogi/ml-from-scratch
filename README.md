@@ -27,3 +27,6 @@ behind common ML models.
 ```bash
 pip install -r requirements.txt
 python linear_regression_gd.py
+
+```
+- Observed stable convergence of gradient descent through loss curves
