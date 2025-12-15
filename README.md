@@ -21,3 +21,9 @@ behind common ML models.
 ## Focus
 - No scikit-learn models
 - Emphasis on clarity and learning
+
+## How to Run
+
+```bash
+pip install -r requirements.txt
+python linear_regression_gd.py
