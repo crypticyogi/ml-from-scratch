@@ -4,14 +4,19 @@
 This repository contains implementations of core machine learning
 algorithms **from scratch**, without relying on high-level ML libraries.
 
-The goal is to deeply understand the mathematics and optimization
-behind common ML models.
+The goal is to develop a deep understanding of the **mathematics,
+optimization, and learning dynamics** behind common ML models.
 
-## Implemented / Planned
-- Linear Regression (Gradient Descent)
-- Logistic Regression
-- k-Nearest Neighbors (planned)
-- Decision Trees (planned)
+## Implemented Algorithms
+- **Linear Regression (Gradient Descent)**  
+  File: `linear_regression_gd.py`
+
+- **Logistic Regression (Gradient Descent)**  
+  File: `logistic_regression_gd.py`
+
+## Planned
+- k-Nearest Neighbors (KNN)
+- Decision Trees
 
 ## Tech Stack
 - Python
@@ -19,14 +24,18 @@ behind common ML models.
 - Matplotlib
 
 ## Focus
-- No scikit-learn models
-- Emphasis on clarity and learning
+- No scikit-learn model usage
+- Clear, readable implementations
+- Emphasis on learning and interpretability
 
 ## How to Run
 
 ```bash
 pip install -r requirements.txt
+```
+
+# Linear Regression
 python linear_regression_gd.py
 
-```
-- Observed stable convergence of gradient descent through loss curves
+# Logistic Regression
+python logistic_regression_gd.py
