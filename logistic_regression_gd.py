@@ -105,10 +105,29 @@ def demo():
     model = LogisticRegressionGD(lr=0.1, epochs=2000)
     model.fit(X, y)
 
-    preds = model.predict(X)
-    acc = float(np.mean(preds == y))
+    # Train/test split
+    rng = np.random.default_rng(42)
+    idx = rng.permutation(len(y))
+    split = int(0.8 * len(y))
+    train_idx, test_idx = idx[:split], idx[split:]
 
-    print(f"Accuracy on training set: {acc:.4f}")
+    X_train, y_train = X[train_idx], y[train_idx]
+    X_test, y_test = X[test_idx], y[test_idx]
+
+    model = LogisticRegressionGD(lr=0.1, epochs=2000)
+    model.fit(X_train, y_train)
+
+    from metrics import classification_report
+    y_pred = model.predict(X_test)
+
+    report = classification_report(y_test, y_pred)
+    print("Test set metrics:")
+    print(f"Accuracy : {report['accuracy']:.4f}")
+    print(f"Precision: {report['precision']:.4f}")
+    print(f"Recall   : {report['recall']:.4f}")
+    print(f"F1       : {report['f1']:.4f}")
+    print(f"TP={report['tp']} TN={report['tn']} FP={report['fp']} FN={report['fn']}")
+
     print(f"Final loss: {model.loss_history[-1]:.6f}")
     print(f"Learned weights: {model.w}, bias: {model.b:.4f}")
 
