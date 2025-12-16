@@ -32,10 +32,15 @@ optimization, and learning dynamics** behind common ML models.
 
 ```bash
 pip install -r requirements.txt
-```
 
 # Linear Regression
 python linear_regression_gd.py
 
 # Logistic Regression
 python logistic_regression_gd.py
+
+# KNN Classifier
+knn_classifier.py
+
+```
+
