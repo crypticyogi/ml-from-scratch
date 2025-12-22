@@ -1,46 +1,32 @@
 # Machine Learning From Scratch
 
 ## Overview
-This repository contains implementations of core machine learning
-algorithms **from scratch**, without relying on high-level ML libraries.
+Implementations of core machine learning algorithms **from scratch** (no high-level model APIs),
+focusing on clear code, learning dynamics, and correct evaluation.
 
-The goal is to develop a deep understanding of the **mathematics,
-optimization, and learning dynamics** behind common ML models.
+## Implemented
+### 1) Linear Regression (Gradient Descent)
+- File: `linear_regression_gd.py`
+- Demonstrates: MSE loss, batch gradient descent, convergence via loss curve
 
-## Implemented Algorithms
-- **Linear Regression (Gradient Descent)**  
-  File: `linear_regression_gd.py`
+### 2) Logistic Regression (Gradient Descent)
+- File: `logistic_regression_gd.py`
+- Demonstrates: sigmoid, binary cross-entropy, decision surface, train/test evaluation + metrics
 
-- **Logistic Regression (Gradient Descent)**  
-  File: `logistic_regression_gd.py`
+### 3) k-Nearest Neighbors (KNN)
+- File: `knn_classifier.py`
+- Demonstrates: distance-based classification, majority vote, simple train/test evaluation
 
-## Planned
-- k-Nearest Neighbors (KNN)
-- Decision Trees
+## Utilities
+- `metrics.py` — basic classification metrics (accuracy/precision/recall/F1, confusion counts)
 
 ## Tech Stack
-- Python
-- NumPy
-- Matplotlib
+Python, NumPy, Matplotlib
 
-## Focus
-- No scikit-learn model usage
-- Clear, readable implementations
-- Emphasis on learning and interpretability
-
-## How to Run
-
+## How to run
 ```bash
 pip install -r requirements.txt
 
-# Linear Regression
 python linear_regression_gd.py
-
-# Logistic Regression
 python logistic_regression_gd.py
-
-# KNN Classifier
-knn_classifier.py
-
-```
-
+python knn_classifier.py
