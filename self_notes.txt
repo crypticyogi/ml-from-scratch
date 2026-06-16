@@ -20,3 +20,23 @@ Testing it on 2D data:
 - Every data point can be plotted as a single dot on a flat plane
 - The code generates two fake clusters of points (Gaussian blobs)
 - Because the data is 2D, you can draw the model's decision boundary as a line (or curve) and actually see how well they separates the two classes.
+
+Studying Output:
+- Every 200 passes through the full training set, it outputs average loss
+- The number is going down, this means model is getting better at predicting labels
+- The model stopped early (at around 1600 instead of 2000 epochs): this shows there is nothing meaningful left to be learn
+
+We learnt the formulas for: Accuracy, Precision and Recall in Elements of Machine Learning Course (Prof. Isabella Valera)
+1. Accuracy: 100% predicted correctly
+2. Precision: When it predicted class 1, it was right every time
+3. Recall: It found every actual class -1 in the test set.
+F1: Harmonic mean of Precision and Recall.
+
+Why so Perfect Confusion Matrix (Machine Learning, SS2026: Prof. Valera): This is an easy problem, so logistic regression nails it. Real world messy data rarely scores 100%.
+
+We get "Final Loss = 0.016271", which means the model is not confident 100% on every single data point. This measures the remaining uncertainity on the training set. It is very low, which is good.
+
+We got Learned Weights and Bias: Learned weights: [4.4523 4.441 ], bias: -0.5103
+- Hence the boundary equation becomes 4.4523.x1 + 4.441x2 - 0.5103
+- Because the two weights are nearly equal, the boundary is roughly a diagonal line slicing between your two blobs.
+- The negative bias shifts that line so it sits between the clusters rather than passing through the origin.
