@@ -1,0 +1,22 @@
+Binary Logistic Regression:
+- Predicts which of the two classes an input belongs to
+- Instead of outputting 0 or 1, it gives a probability using a sigmoid function
+- If the probability is greater than or equal to 1, then we say it belongs to class 1. Else we say class 0.
+- Even though the name says "Regression" it is basically used for "Classification".
+
+Batch Gradient Descent:
+Gradient: Direction in which the loss increases fastest. Hence to minimise the loss, we step in the direction oppposite to that of Gradient.
+Batch: Computing gradient using the entire dataset at once (not one point at a time).
+Descent: Repeatedly take small steps downhill on the loss surface.
+
+In the code, the loop does this every epoch (iteration):
+1. Find probabilities of all training examples
+2. Compute the average error (loss)
+3. Calculate how much each weight and the bias contributed to that error (the gradient)
+4. Repeat untill the loss stops improving or you hit the max epochs.
+
+Testing it on 2D data:
+- Each input example has two numerical examples
+- Every data point can be plotted as a single dot on a flat plane
+- The code generates two fake clusters of points (Gaussian blobs)
+- Because the data is 2D, you can draw the model's decision boundary as a line (or curve) and actually see how well they separates the two classes.
