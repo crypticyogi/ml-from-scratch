@@ -40,3 +40,11 @@ We got Learned Weights and Bias: Learned weights: [4.4523 4.441 ], bias: -0.5103
 - Hence the boundary equation becomes 4.4523.x1 + 4.441x2 - 0.5103
 - Because the two weights are nearly equal, the boundary is roughly a diagonal line slicing between your two blobs.
 - The negative bias shifts that line so it sits between the clusters rather than passing through the origin.
+
+Output Graphs:
+1. Since logistic regression is a linear model, the boundary between blue and red is a straight line.
+2. The curve drops very fast in the first 50 epochs then keeps slowly bending downward until it flattens out around epoch 400.
+3. The improvements afterwards are tiny which is exactly why the code triggered early stopping at epoch 1600 instead of running all 2000 epochs. 
+- The model had already learned everything useful.
+4. The loss curve shows successful learning
+5. The decision surface shows that learning translated into a clean separator between the two classes with zero mistakes on unseen test data.
