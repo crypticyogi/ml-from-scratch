@@ -1,11 +1,44 @@
+Linear Regression:
+
+What is Linear Regression?
+- Finds the best fit straight line or hyperplane through data.
+- Assumes relationship: y = w·x + b (for 1 feature)
+  w = weight, b = bias
+How do we find w and b?
+- Define an error function = Mean Squared Error (MSE)
+- Our goal is to find w,b that minimizes the MSE
+Why not just use a formula?
+- There is a closed form solution: Normal Equation
+- But Gradient Descent (GD) scales better to huge datasets and is the foundation for neural networks.
+Batch Gradient Descent:
+1. Use ALL training examples to compute the gradient in every step.
+2. Gradient = direction of steepest increase in loss.
+3. Update rule: w = w − lr·(dL/dw) and b = b − lr·(dL/db) {lr = learning rate}
+4. Repeat until loss stops changing (convergence)
+Add-Ons Used:
+- L2 Regularization (Ridge)
+- Early Stopping: Stop training if loss improvement < tolerance (saves time)
+Train/Test Split:
+- Shuffle data, take 80% for training, 20% for testing.
+- Never fit on test data, this tells us if the model generalizes.
+Output Explanation:
+1. A straight line is sufficient for this data.
+2. Loss curve goes down and settles at the minimum.
+3. Learned w and b are very close to the true (3, 2) despite noise.
+4. Train and Test MSE are close: model did not overfit.
+5. Code supports alpha, setting it to 0 here is correct because this simple problem doesn't need it.
+6. Normal Equation = GD optimum (Both methods give the same answer, validating the implementation)
+
+
 Binary Logistic Regression:
+
 - Predicts which of the two classes an input belongs to
 - Instead of outputting 0 or 1, it gives a probability using a sigmoid function
-- If the probability is greater than or equal to 1, then we say it belongs to class 1. Else we say class 0.
+- If the probability is greater than or equal to 0.5, then we say it belongs to class 1. Else we say class 0.
 - Even though the name says "Regression" it is basically used for "Classification".
 
 Batch Gradient Descent:
-Gradient: Direction in which the loss increases fastest. Hence to minimise the loss, we step in the direction oppposite to that of Gradient.
+Gradient: Direction in which the loss increases fastest. Hence to minimise the loss, we step in the direction opposite to that of Gradient.
 Batch: Computing gradient using the entire dataset at once (not one point at a time).
 Descent: Repeatedly take small steps downhill on the loss surface.
 
@@ -13,38 +46,38 @@ In the code, the loop does this every epoch (iteration):
 1. Find probabilities of all training examples
 2. Compute the average error (loss)
 3. Calculate how much each weight and the bias contributed to that error (the gradient)
-4. Repeat untill the loss stops improving or you hit the max epochs.
+4. Repeat until the loss stops improving or you hit the max epochs.
 
 Testing it on 2D data:
-- Each input example has two numerical examples
+- Each input example has two numerical features
 - Every data point can be plotted as a single dot on a flat plane
 - The code generates two fake clusters of points (Gaussian blobs)
-- Because the data is 2D, you can draw the model's decision boundary as a line (or curve) and actually see how well they separates the two classes.
+- Because the data is 2D, you can draw the model's decision boundary as a line (or curve) and actually see how well it separates the two classes.
 
 Studying Output:
 - Every 200 passes through the full training set, it outputs average loss
 - The number is going down, this means model is getting better at predicting labels
-- The model stopped early (at around 1600 instead of 2000 epochs): this shows there is nothing meaningful left to be learn
+- The model stopped early (at around 1600 instead of 2000 epochs): this shows there is nothing meaningful left to learn
 
 We learnt the formulas for: Accuracy, Precision and Recall in Elements of Machine Learning Course (Prof. Isabella Valera)
 1. Accuracy: 100% predicted correctly
 2. Precision: When it predicted class 1, it was right every time
-3. Recall: It found every actual class -1 in the test set.
+3. Recall: It found every actual class 1 in the test set.
 F1: Harmonic mean of Precision and Recall.
 
 Why so Perfect Confusion Matrix (Machine Learning, SS2026: Prof. Valera): This is an easy problem, so logistic regression nails it. Real world messy data rarely scores 100%.
 
-We get "Final Loss = 0.016271", which means the model is not confident 100% on every single data point. This measures the remaining uncertainity on the training set. It is very low, which is good.
+We get "Final Loss = 0.016271", which means the model is not confident 100% on every single data point. This measures the remaining uncertainty on the training set. It is very low, which is good.
 
 We got Learned Weights and Bias: Learned weights: [4.4523 4.441 ], bias: -0.5103
-- Hence the boundary equation becomes 4.4523.x1 + 4.441x2 - 0.5103
+- Hence the boundary equation becomes 4.4523·x1 + 4.441·x2 - 0.5103
 - Because the two weights are nearly equal, the boundary is roughly a diagonal line slicing between your two blobs.
 - The negative bias shifts that line so it sits between the clusters rather than passing through the origin.
 
 Output Graphs:
 1. Since logistic regression is a linear model, the boundary between blue and red is a straight line.
 2. The curve drops very fast in the first 50 epochs then keeps slowly bending downward until it flattens out around epoch 400.
-3. The improvements afterwards are tiny which is exactly why the code triggered early stopping at epoch 1600 instead of running all 2000 epochs. 
+3. The improvements afterwards are tiny which is exactly why the code triggered early stopping at epoch 1600 instead of running all 2000 epochs.
 - The model had already learned everything useful.
 4. The loss curve shows successful learning
 5. The decision surface shows that learning translated into a clean separator between the two classes with zero mistakes on unseen test data.
