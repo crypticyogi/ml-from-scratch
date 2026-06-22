@@ -81,3 +81,46 @@ Output Graphs:
 - The model had already learned everything useful.
 4. The loss curve shows successful learning
 5. The decision surface shows that learning translated into a clean separator between the two classes with zero mistakes on unseen test data.
+
+Polynomial Regression:
+
+What the training loop does?
+
+For each polynomial degree:
+- Build polynomial features
+- Scale them
+- Solve the Normal Equation
+- Predict on train and test
+- Compute MSE
+- Plot:
+    Fit curve
+    Residuals
+    Coefficient magnitudes
+
+This gives a complete picture of model behavior.
+
+Understanding the Output:
+1. Fit Plot
+Shows how well the polynomial curve matches the noisy sine data
+- Degree 1: underfitting
+- Degree 3: good approximation
+- Degree 10: overfitting (wiggly curve)
+
+2. Residual Plot
+- Residuals = actual − predicted
+- Should be randomly scattered around 0
+- Patterns indicate underfitting or overfitting
+
+3. Coefficient Magnitudes
+- High degree models often have huge coefficients
+- This is a classic sign of overfitting
+- Ridge (alpha > 0) would shrink these
+
+Key Takeaways:
+1. Polynomial Regression fits curves by adding powers of x.
+2. Feature scaling is essential to avoid exploding values.
+3. Normal Equation gives a closed form solution.
+4. Ridge regularization stabilizes high degree models.
+5. Train vs Test MSE reveals overfitting.
+6. Coefficient magnitudes visually show model complexity.
+7. Polynomial Regression can approximate sin(x) surprisingly well with moderate degree.
