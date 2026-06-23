@@ -124,3 +124,117 @@ Key Takeaways:
 5. Train vs Test MSE reveals overfitting.
 6. Coefficient magnitudes visually show model complexity.
 7. Polynomial Regression can approximate sin(x) surprisingly well with moderate degree.
+
+Decision Tree:
+
+Goal:
+1. Implement a Decision Tree Classifier from scratch (no sklearn).
+2. Train it on 2D toy data, test it, print metrics, plot decision boundaries and show underfit vs good fit vs overfit.
+
+Imports:
+1. numpy for arrays + math
+2. matplotlib.pyplot for plotting decision regions + feature importance bars
+
+Each node stores:
+
+- impurity (gini/entropy at this node)
+- num_samples (samples reaching node)
+- num_samples_per_class (class counts)
+- predicted_class (majority class at node)
+- split info:
+- feature_index (which feature to split on)
+  threshold (split value)
+  left, right child pointers
+  info_gain (impurity reduction from the split)
+
+Hyperparameters:
+- criterion: "gini" or "entropy" (how impurity is measured)
+- max_depth: maximum tree depth
+- min_samples_split: minimum samples needed to try a split
+- min_samples_leaf: minimum samples allowed in each leaf
+
+Learned attributes:
+- tree_: root Node
+- classes_: unique class labels
+- n_features_: number of input features
+- feature_importances_: importance score per feature (based on impurity reduction)
+
+Training: fit(X, y):
+
+Steps:
+1. Get classes_ and map y into 0..K-1 (np.unique(..., return_inverse=True)).
+2. Store n_features_
+3. Initialize feature_importances_ = zeros
+4. Build tree recursively with _grow_tree(X, y)
+5. Normalize feature importances to sum to 1
+
+Prediction: predict(X):
+
+- For each sample x, call _predict_one(x):
+- start at root
+- if x[feature_index] < threshold go left else right
+- stop at leaf and return classes_[predicted_class]
+
+Finding best split: _best_split(X, y)
+Purpose: choose (feature_index, threshold) that minimizes weighted child impurity.
+
+For each feature idx:
+
+- Sort samples by that feature value.
+- Sweep split point i = 1..m-1:
+- skip if consecutive feature values are equal
+- enforce min_samples_leaf on both sides
+- compute:
+  impurity_left = impurity(y_left)
+  impurity_right = impurity(y_right)
+  weighted impurity = (i*left + (m-i)*right)/m
+- Keep split with lowest impurity.
+Returns: best_idx, best_thr, best_impurity (child weighted impurity).
+
+Growing the tree: _grow_tree(X, y, depth)
+At a node:
+
+Compute class counts and majority class: predicted_class.
+Compute current_impurity.
+Create a Node(...).
+Split only if:
+- depth < max_depth
+- len(y) >= min_samples_split
+- and _best_split returns a valid split
+If split found:
+- partition with mask X[:, idx] < thr
+- store node split info (feature_index, threshold)
+- info_gain = current_impurity − child_impurity
+- update feature importance:
+  feature_importances_[idx] += len(y) * info_gain
+- recursively grow left and right
+
+Tree printing: print_tree()
+Prints human-readable rules:
+IF feature < threshold then left else right
+Leaf shows predicted class + sample counts.
+
+make_toy_data(n, seed)
+
+- Creates a simple 2-class dataset in 2D:
+  class 0: Normal centered at (-2, -2)
+  class 1: Normal centered at ( 2, 2)
+- Shuffles data and returns (X, y).
+
+Custom train_test_split
+
+- Random permutation
+- test size = int(n * test_size)
+- returns X_train, X_test, y_train, y_test
+
+_evaluate(y_true, y_pred)
+
+Manually computes: 
+- TP, TN, FP, FN
+- Accuracy, Precision, Recall, F1
+
+plot_decision_boundary(model, ...)
+- Creates a grid over feature space
+- Predicts class for each grid point
+- Uses contourf to color regions + boundary line
+- Plots training points (circles) and test points (stars)
